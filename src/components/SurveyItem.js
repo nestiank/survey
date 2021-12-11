@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function SurveyItem() {
   const { surveyID } = useParams();
@@ -26,19 +26,22 @@ function SurveyItem() {
         <p>SurveyItem Page</p>
         <p>Survey ID: {surveyID}</p>
         <p>Invalid Survey ID</p>
+        <Link to="/survey"><p>Go to Survey List</p></Link>
       </div>
     );
   }
-
-  return (
-    <div>
-      <p>SurveyItem Page</p>
-      <p>Survey ID: {surveyID}</p>
-      <p>Survey Title: {survey.title}</p>
-      <p>Survey Poll #1: {survey.leftPoll}</p>
-      <p>Survey Poll #2: {survey.rightPoll}</p>
-    </div>
-  );
+  else {
+    return (
+      <div>
+        <p>SurveyItem Page</p>
+        <p>Survey ID: {surveyID}</p>
+        <p>Survey Title: {survey.title}</p>
+        <p>Survey Poll #1: {survey.leftPoll}</p>
+        <p>Survey Poll #2: {survey.rightPoll}</p>
+        <Link to="/survey"><p>Go to Survey List</p></Link>
+      </div>
+    );
+  }
 }
 
 export default SurveyItem;

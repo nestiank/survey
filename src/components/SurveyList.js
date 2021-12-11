@@ -1,17 +1,22 @@
+import { Link } from "react-router-dom";
+
 function SurveyList() {
   const somehowSurveyListGetFunction = () => {
     return [
       {
+        "id": 1,
         "title": "surveyTitleSample#1",
         "leftPoll": "O",
         "rightPoll": "X"
       },
       {
+        "id": 2,
         "title": "surveyTitleSample#2",
         "leftPoll": "O",
         "rightPoll": "X"
       },
       {
+        "id": 3,
         "title": "surveyTitleSample#3",
         "leftPoll": "O",
         "rightPoll": "X"
@@ -21,9 +26,15 @@ function SurveyList() {
   const sampleSurveys = somehowSurveyListGetFunction();
   
   return (
-    <div>
-      {sampleSurveys.map(survey => <div><p>{survey.title} - {survey.leftPoll} vs. {survey.rightPoll}</p></div>)}
-    </div>
+    <ul>
+      {sampleSurveys.map(
+        survey => (
+          <li>
+            <Link to={`/survey/${survey.id}`}>{survey.title} - {survey.leftPoll} vs. {survey.rightPoll}</Link>
+          </li>
+        )
+      )}
+    </ul>
   );
 }
 

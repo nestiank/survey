@@ -1,17 +1,17 @@
 import NaverLogin from 'react-naver-login';
 import '../style/Misc.css'
 
-function LoginPage() {
+function LoginPage({ login }) {
   return (
     <div>
       <p>로그인</p>
       <NaverLogin
-        clientID="Rioh_LQASaofKvv7eelc"
-        callbackUrl="https://nestiank.github.io/survey/login/"
+        clientId="Rioh_LQASaofKvv7eelc"
+        callbackUrl="https://nestiank.github.io/survey/"
         render={(props) => <div onClick={props.onClick}>
-          <img class="loginButton" src="loginButtonNaver.png" alt="네이버 로그인"/>
+          <img className="loginButton" src="loginButtonNaver.png" alt="네이버 로그인"/>
         </div>}
-        onSuccess={(naverUser) => console.log(naverUser)}
+        onSuccess={(naverUser) => login(naverUser.email)}
         onFailure={(result) => console.error(result)}
       />
     </div>

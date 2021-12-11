@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../style/Header.css'
 
 function Header() {
@@ -5,7 +6,7 @@ function Header() {
     <div id="header">
       <div id="title">
         <div className="logoWrapper">
-          <img id="logo" src="favicon.ico" alt="로고" />
+          <img id="logo" src="/survey/favicon.ico" alt="로고" />
         </div>
         <div className="center">
           <h2>설문조사 시스템</h2>
@@ -14,11 +15,11 @@ function Header() {
       </div>
       <hr />
       <div>
-        <a href="/">홈</a>
+        <Link to="/">홈</Link>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/survey">목록</a>
+        <Link to="/survey">목록</Link>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/admin">관리자</a>
+        <Link to="/admin">관리자</Link>
       </div>
       <hr />
     </div>
