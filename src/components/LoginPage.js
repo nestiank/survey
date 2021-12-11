@@ -1,42 +1,19 @@
-import { useState } from "react";
+import NaverLogin from 'react-naver-login';
+import '../style/Misc.css'
 
-function LoginPage({ login }) {
-  const [id, setID] = useState();
-  const [pw, setPW] = useState();
-
-  const loginFunction = () => {
-    // 인증 진행
-    const somehowLoginLogic = pw === "pw";
-    if (somehowLoginLogic) {
-      login(id);
-    }
-    else {
-      window.alert("비밀번호가 틀렸습니다.");
-    }
-  }
-
+function LoginPage() {
   return (
     <div>
-      <p>Login Page</p>
-      <form onSubmit={loginFunction} method="post" className="login-form">
-        <div>
-          <div>
-            <div style={{display: 'inline'}}>ID: </div>
-            <label htmlFor="id">
-              <input type="text" value={id} onChange={e => setID(e.target.value)} required placeholder="ID를 입력하세요."></input>
-            </label>
-          </div>
-          <div>
-            <div style={{display: 'inline'}}>PW: </div>
-            <label htmlFor="password">
-              <input type="text" value={pw} onChange={e => setPW(e.target.value)} required placeholder="비밀번호를 입력하세요."></input>
-            </label>
-          </div>
-          <div>
-            <input type="submit" value="로그인" />
-          </div>
-        </div>
-      </form>
+      <p>로그인</p>
+      <NaverLogin
+        clientID="Rioh_LQASaofKvv7eelc"
+        callbackUrl="https://nestiank.github.io/survey/login/"
+        render={(props) => <div onClick={props.onClick}>
+          <img class="loginButton" src="loginButtonNaver.png" alt="네이버 로그인"/>
+        </div>}
+        onSuccess={(naverUser) => console.log(naverUser)}
+        onFailure={(result) => console.error(result)}
+      />
     </div>
   );
 }
