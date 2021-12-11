@@ -1,0 +1,18 @@
+#title {
+  display: table;
+  text-align: center;
+}
+
+.logoWrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.center {
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#logo {
+  height: 85px;
+}

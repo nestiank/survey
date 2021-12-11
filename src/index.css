@@ -1,9 +1,29 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 
 body {
-  margin: 0;
   font-family: Pretendard, Montserrat, Noto Sans KR, Nanum Square, Malgun Gothic, Times New Roman, sans-serif;
 	word-break: break-all;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f3efee;
+}
+
+.App {
+	border: 1px solid #862633;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px;
+  width: 70%;
+  background-color: #ffffff;
+}
+.App a {
+	text-decoration: underline;
+  text-decoration-style: dotted;
+	color: black;
+}
+.App button {
+  outline: none;
+	background-color: white;
 }

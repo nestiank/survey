@@ -21,14 +21,14 @@ function LoginPage({ login }) {
       <form onSubmit={loginFunction} method="post" className="login-form">
         <div>
           <div>
-          <div style={{display: 'inline'}}>ID: </div>
-            <label for="id">
+            <div style={{display: 'inline'}}>ID: </div>
+            <label htmlFor="id">
               <input type="text" value={id} onChange={e => setID(e.target.value)} required placeholder="ID를 입력하세요."></input>
             </label>
           </div>
           <div>
             <div style={{display: 'inline'}}>PW: </div>
-            <label for="password">
+            <label htmlFor="password">
               <input type="text" value={pw} onChange={e => setPW(e.target.value)} required placeholder="비밀번호를 입력하세요."></input>
             </label>
           </div>
