@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import LoginPage from './components/LoginPage';
@@ -7,22 +6,32 @@ import SurveyList from './components/SurveyList';
 import SurveyItem from './components/SurveyItem';
 import Admin from './components/Admin';
 import Page404 from './components/Page404';
+import Error from './components/Error'
 
 function App() {
-  const [currentUser, setCurrentUser] = useState();
-
-  return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={currentUser ? <Home userID={currentUser} logout={setCurrentUser} /> : <LoginPage login={setCurrentUser} />} />
-        <Route path="/survey" element={<SurveyList />} />
-        <Route path="/survey/:surveyID" element={<SurveyItem />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/*" element={<Page404 />} />
-      </Routes>
-    </div>
-  );
+  try {
+    const currentUser = localStorage.getItem("userNickname");
+    return (
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={currentUser ? <Home /> : <LoginPage />} />
+          <Route path="/survey" element={<SurveyList />} />
+          <Route path="/survey/:surveyID" element={<SurveyItem />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/*" element={<Page404 />} />
+        </Routes>
+      </div>
+    );
+  } catch (e) {
+    console.log("localStorage is not working...");
+    return (
+      <div className="App">
+        <Header />
+        <Error />
+      </div>
+    )
+  }
 }
 
 export default App;

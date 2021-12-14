@@ -1,7 +1,35 @@
 import NaverLogin from 'react-naver-login';
 import '../style/Misc.css'
 
-function LoginPage({ login }) {
+function LoginPage() {
+  const somehowDBInsertNickname = (email, nickname) => {
+    // to-do...
+    return true;
+  };
+  const login = ( email ) => {
+    // to-do...
+    // const nickname = somehowDBGetNickname(email);
+    const nickname = "nestiank";
+    if (nickname) {
+      localStorage.setItem("userNickname", nickname);
+    }
+    else {
+      while (true) {
+        const nicknameCandidate = prompt('새로 사용할 닉네임을 입력해주세요');
+        const isNicknameAvailable = somehowDBInsertNickname(email, nicknameCandidate);
+        if (isNicknameAvailable) {
+          localStorage.setItem("userNickname", nicknameCandidate);
+          break;
+        }
+        else {
+          window.alert("사용할 수 없는 닉네임입니다");
+        }
+      }
+    }
+
+    window.location.reload();
+  };
+
   return (
     <div>
       <p>로그인</p>

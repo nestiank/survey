@@ -1,20 +1,17 @@
 import '../style/Misc.css'
 
-function Home({ userID, logout }) {
-  const logoutFunction = () => {
-    // 인증 해제 진행
-    logout(null);
-  }
-  const somehowGetUserNickname = ({ id }) => {
-    return "nestiank";
+function Home() {
+  const logout = () => {
+    localStorage.removeItem("userNickname");
+    window.location.reload();
   }
 
-  const userNickname = somehowGetUserNickname(userID);
+  const userNickname = localStorage.getItem("userNickname");
 
   return (
     <div>
       <h3>{userNickname}님 환영합니다!</h3>
-      <button className="logoutButton" onClick={logoutFunction}>로그아웃</button>
+      <button className="logoutButton" onClick={logout}>로그아웃</button>
     </div>
   );
 }
