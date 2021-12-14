@@ -1,12 +1,12 @@
 function Admin() {
   return (
     <div>
-      <p>Admin Page</p>
+      <p>관리자 페이지</p>
       <ul>
-        <li>New Survey Function</li>
-        <li>Survey List - Advanced</li>
-        <li>Member List</li>
-        <li>Statistics</li>
+        <li>새로운 설문 생성</li>
+        <li>고급 설문 목록</li>
+        <li>회원 명단</li>
+        <li>서비스 통계</li>
       </ul>
     </div>
   );

@@ -23,22 +23,22 @@ function SurveyItem() {
   if (!survey) {
     return (
       <div>
-        <p>SurveyItem Page</p>
-        <p>Survey ID: {surveyID}</p>
-        <p>Invalid Survey ID</p>
-        <Link to="/survey"><p>Go to Survey List</p></Link>
+        <p>설문조사</p>
+        <p>설문 번호: {surveyID}</p>
+        <p><strong>유효하지 않은 설문입니다.</strong></p>
+        <Link to="/survey"><p>설문 목록 보기</p></Link>
       </div>
     );
   }
   else {
     return (
       <div>
-        <p>SurveyItem Page</p>
-        <p>Survey ID: {surveyID}</p>
-        <p>Survey Title: {survey.title}</p>
-        <p>Survey Poll #1: {survey.leftPoll}</p>
-        <p>Survey Poll #2: {survey.rightPoll}</p>
-        <Link to="/survey"><p>Go to Survey List</p></Link>
+        <p>설문조사</p>
+        <p>설문 번호: {surveyID}</p>
+        <p>설문 제목: {survey.title}</p>
+        <p>선택지 #1: {survey.leftPoll}</p>
+        <p>선택지 #2: {survey.rightPoll}</p>
+        <Link to="/survey"><p>설문 목록 보기</p></Link>
       </div>
     );
   }

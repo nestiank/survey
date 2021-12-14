@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SurveyList() {
   const somehowSurveyListGetFunction = () => {
@@ -24,17 +24,36 @@ function SurveyList() {
     ];
   }
   const sampleSurveys = somehowSurveyListGetFunction();
+
+  const navigate = useNavigate();
+  const Search = () => {
+    const url = "/survey/" + document.getElementById('surveySearch').value;
+    navigate(url);
+  };
   
   return (
-    <ul>
-      {sampleSurveys.map(
-        survey => (
-          <li>
-            <Link to={`/survey/${survey.id}`}>{survey.title} - {survey.leftPoll} vs. {survey.rightPoll}</Link>
-          </li>
-        )
-      )}
-    </ul>
+    <div>
+      <h3>설문 목록</h3>
+      <div>
+        <h4 style={{display: "inline"}}>설문 검색</h4>
+        &nbsp;&nbsp;
+        <form action="#" onSubmit={Search} style={{display: "inline"}}>
+          <input id="surveySearch" />
+        </form>
+      </div>
+      <ul>
+        {sampleSurveys ?
+          sampleSurveys.map(
+            survey => (
+              <li key={survey.id}>
+                <Link to={`/survey/${survey.id}`}>{survey.title} - {survey.leftPoll} vs. {survey.rightPoll}</Link>
+              </li>
+            )
+          ) :
+          <li>설문이 없습니다.</li>
+        }
+      </ul>
+    </div>
   );
 }
 
