@@ -2,6 +2,11 @@
 
 > 소셜로그인을 거쳐 투표하고 댓글을 달 수 있는 설문 커뮤니티입니다.
 
+### 라이브 데모
+
+  * https://nestiank-survey.firebaseapp.com/
+  * https://survey.nestian.kr (지원 예정)
+
 ### 기능 설명
 
   * 작성 예정
