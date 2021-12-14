@@ -32,7 +32,7 @@ function LoginPage() {
 
   return (
     <div>
-      <p>로그인</p>
+      <h3>로그인</h3>
       <NaverLogin
         clientId="Rioh_LQASaofKvv7eelc"
         callbackUrl="https://nestiank-survey.firebaseapp.com/"
