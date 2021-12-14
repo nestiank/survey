@@ -10,19 +10,24 @@ import LoginNeeded from './components/LoginNeeded';
 import Error from './components/Error'
 
 function App() {
-  const currentUser = localStorage.getItem("userNickname");
-
   try {
+    const currentUser = localStorage.getItem("userNickname");
     return (
       <div className="App">
         <Header />
-        <Routes>
-          <Route path="/" element={currentUser ? <Home /> : <LoginPage />} />
-          <Route path="/survey" element={currentUser ? <SurveyList /> : <LoginNeeded />} />
-          <Route path="/survey/:surveyID" element={currentUser ? <SurveyItem /> : <LoginNeeded />} />
-          <Route path="/admin" element={currentUser ? <Admin /> : <LoginNeeded />} />
-          <Route path="/*" element={currentUser ? <Page404 /> : <LoginNeeded />} />
-        </Routes>
+        {currentUser ?
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/survey" element={<SurveyList />} />
+            <Route path="/survey/:surveyID" element={<SurveyItem />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/*" element={<Page404 />} />
+          </Routes> :
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/*" element={<LoginNeeded />} />
+          </Routes>
+        }
       </div>
     );
   } catch (e) {
