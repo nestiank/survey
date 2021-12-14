@@ -35,7 +35,7 @@ function LoginPage() {
       <p>로그인</p>
       <NaverLogin
         clientId="Rioh_LQASaofKvv7eelc"
-        callbackUrl="https://nestiank.github.io/survey/"
+        callbackUrl="https://nestiank-survey.firebaseapp.com/"
         render={(props) => <div onClick={props.onClick}>
           <img className="loginButton" src="loginButtonNaver.png" alt="네이버 로그인"/>
         </div>}
