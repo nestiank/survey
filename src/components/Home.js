@@ -1,21 +1,23 @@
+import { signOut } from 'firebase/auth';
 import '../style/Misc.css'
 
-function Home() {
-  const logout = () => {
-    localStorage.removeItem("userNickname");
+function Home({ auth, user, logout }) {
+  const Logout = () => {
+    signOut(auth);
+    logout();
     window.location.reload();
   }
 
-  const userNickname = localStorage.getItem("userNickname");
+  const userEmail = user.user.providerData[0].email;
   // to-do...
-  // const email = somehowDBGetEmail(userNickname);
-  const userEmail = "nestiank@korea.ac.kr";
+  // const userNickname = SomehowDBGetNickname(userEmail);
+  const userNickname = "nestiank";
 
   return (
     <div>
       <h3>{userNickname}님 환영합니다!</h3>
       <h4>이메일 주소: {userEmail}</h4>
-      <button className="logoutButton" onClick={logout}>로그아웃</button>
+      <button className="logoutButton" onClick={Logout}>로그아웃</button>
     </div>
   );
 }

@@ -3,22 +3,22 @@ import { Link, useParams } from 'react-router-dom'
 function SurveyItem() {
   const { surveyID } = useParams();
 
-  const sampleSurvey = {
-    "title": "surveyTitleSample",
+  const sample = {
+    "title": "설문 샘플 #1",
     "leftPoll": "O",
     "rightPoll": "X"
   };
 
   // 설문 내용 가져오기
-  const somehowSurveyGetFunction = (ID) => {
+  const SomehowSurveyGetFunction = (ID) => {
     if (ID === "1") {
-      return sampleSurvey;
+      return sample;
     }
     else {
       return null;
     }
   }
-  const survey = somehowSurveyGetFunction(surveyID);
+  const survey = SomehowSurveyGetFunction(surveyID);
 
   if (!survey) {
     return (

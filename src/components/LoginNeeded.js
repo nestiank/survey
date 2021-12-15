@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function LoginNeeded() {
-  const currentUser = localStorage.getItem("userNickname");
+function LoginNeeded({ auth }) {
+  const currentUser = auth.currentUser;
   const navigate = useNavigate();
   useEffect(() => {
     if (!currentUser){

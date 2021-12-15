@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { getAuth } from 'firebase/auth';
 import Header from './components/Header';
 import LoginPage from './components/LoginPage';
 import Home from './components/Home';
@@ -9,29 +11,30 @@ import Page404 from './components/Page404';
 import LoginNeeded from './components/LoginNeeded';
 import Error from './components/Error'
 
-function App() {
+function App({ app }) {
+  const [userCredential, setUserCredential] = useState();
   try {
-    const currentUser = localStorage.getItem("userNickname");
+    const globalAuth = getAuth(app);
     return (
       <div className="App">
         <Header />
-        {currentUser ?
+        {userCredential ?
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home auth={globalAuth} user={userCredential} logout={setUserCredential} />} />
             <Route path="/survey" element={<SurveyList />} />
             <Route path="/survey/:surveyID" element={<SurveyItem />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/*" element={<Page404 />} />
           </Routes> :
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/*" element={<LoginNeeded />} />
+            <Route path="/" element={<LoginPage auth={globalAuth} login={setUserCredential} />} />
+            <Route path="/*" element={<LoginNeeded auth={globalAuth} />} />
           </Routes>
         }
       </div>
     );
   } catch (e) {
-    console.log("localStorage is not working...");
+    console.log(e);
     return (
       <div className="App">
         <Header />

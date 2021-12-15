@@ -1,33 +1,23 @@
 import NaverLogin from 'react-naver-login';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import '../style/Misc.css'
 
-function LoginPage() {
-  const somehowDBInsertNickname = (email, nickname) => {
-    // to-do...
-    return true;
-  };
-  const login = ( email ) => {
-    // to-do...
-    // const nickname = somehowDBGetNickname(email);
-    const nickname = "nestiank";
-    if (nickname) {
-      localStorage.setItem("userNickname", nickname);
-    }
-    else {
-      while (true) {
-        const nicknameCandidate = prompt('새로 사용할 닉네임을 입력해주세요');
-        const isNicknameAvailable = somehowDBInsertNickname(email, nicknameCandidate);
-        if (isNicknameAvailable) {
-          localStorage.setItem("userNickname", nicknameCandidate);
-          break;
-        }
-        else {
-          window.alert("사용할 수 없는 닉네임입니다");
-        }
+function LoginPage({ auth, login }) {
+  const ProceedNaverLogin = async (email) => {
+    // 네이버 로그인이 지속되면 그만이므로 Firebase 세션은 형식적으로 구동
+    const mock_password = "password";
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, mock_password);
+      login(userCredential);
+    } catch (e) {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, mock_password);
+        login(userCredential);
+      } catch (e) {
+        console.log(e);
       }
     }
-
-    window.location.reload();
   };
 
   return (
@@ -39,7 +29,7 @@ function LoginPage() {
         render={(props) => <div onClick={props.onClick}>
           <img className="loginButton" src="loginButtonNaver.png" alt="네이버 로그인"/>
         </div>}
-        onSuccess={(naverUser) => login(naverUser.email)}
+        onSuccess={(naverUser) => ProceedNaverLogin(naverUser.email)}
         onFailure={(result) => console.error(result)}
       />
     </div>

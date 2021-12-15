@@ -1,29 +1,29 @@
 import { Link, useNavigate } from "react-router-dom";
 
 function SurveyList() {
-  const somehowSurveyListGetFunction = () => {
+  const SomehowSurveyListGetFunction = () => {
     return [
       {
         "id": 1,
-        "title": "surveyTitleSample#1",
+        "title": "설문 샘플 #1",
         "leftPoll": "O",
         "rightPoll": "X"
       },
       {
         "id": 2,
-        "title": "surveyTitleSample#2",
+        "title": "설문 샘플 #2",
         "leftPoll": "O",
         "rightPoll": "X"
       },
       {
         "id": 3,
-        "title": "surveyTitleSample#3",
+        "title": "설문 샘플 #3",
         "leftPoll": "O",
         "rightPoll": "X"
       }
     ];
   }
-  const sampleSurveys = somehowSurveyListGetFunction();
+  const samples = SomehowSurveyListGetFunction();
 
   const navigate = useNavigate();
   const Search = () => {
@@ -42,8 +42,8 @@ function SurveyList() {
         </form>
       </div>
       <ul>
-        {sampleSurveys ?
-          sampleSurveys.map(
+        {samples ?
+          samples.map(
             survey => (
               <li key={survey.id}>
                 <Link to={`/survey/${survey.id}`}>{survey.title} - {survey.leftPoll} vs. {survey.rightPoll}</Link>
