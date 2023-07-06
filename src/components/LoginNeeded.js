@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function LoginNeeded() {
+function LoginNeeded({ auth }) {
   const navigate = useNavigate();
+  const checkAndRedirect = () => {
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      navigate("/");
+    }
+  }
   useEffect(() => {
-    setTimeout(() => navigate("/"), 3000);
+    setTimeout(checkAndRedirect, 3000);
   });
 
   return (
