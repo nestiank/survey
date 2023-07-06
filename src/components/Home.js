@@ -8,8 +8,8 @@ function Home({ auth, user, logout }) {
     window.location.reload();
   }
 
-  const userEmail = user.user.providerData[0].email;
-  const userNickname = user.user.providerData[0].displayName;
+  const userEmail = user.email;
+  const userNickname = user.displayName;
 
   return (
     <div>

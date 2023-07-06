@@ -4,7 +4,7 @@ import '../style/Misc.css'
 
 function LoginPage({ auth, login }) {
   const ProceedNaverLogin = async (email, nickname) => {
-    // 네이버 로그인이 지속되면 그만이므로 Firebase 세션은 형식적으로 구동
+    // 네이버 계정에 기반하여 동작하므로 Firebase 세션에 비밀번호를 저장하지 않음
     const mock_password = "password";
 
     try {

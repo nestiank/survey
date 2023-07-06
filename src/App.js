@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Header from './components/Header';
 import LoginPage from './components/LoginPage';
 import Home from './components/Home';
@@ -11,10 +11,15 @@ import Page404 from './components/Page404';
 import LoginNeeded from './components/LoginNeeded';
 import Error from './components/Error'
 
-function App({ app }) {
+function App() {
   const [userCredential, setUserCredential] = useState();
   try {
-    const globalAuth = getAuth(app);
+    const globalAuth = getAuth();
+    onAuthStateChanged(globalAuth, (user) => {
+      if (user) {
+        setUserCredential(user);
+      }
+    })
     return (
       <div className="App">
         <Header />
