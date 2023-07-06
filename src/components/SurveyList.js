@@ -1,29 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
+import { SomehowGetSurveyList } from '../scripts/database'
 
 function SurveyList() {
-  const SomehowSurveyListGetFunction = () => {
-    return [
-      {
-        "id": 1,
-        "title": "설문 샘플 #1",
-        "leftPoll": "O",
-        "rightPoll": "X"
-      },
-      {
-        "id": 2,
-        "title": "설문 샘플 #2",
-        "leftPoll": "O",
-        "rightPoll": "X"
-      },
-      {
-        "id": 3,
-        "title": "설문 샘플 #3",
-        "leftPoll": "O",
-        "rightPoll": "X"
-      }
-    ];
-  }
-  const samples = SomehowSurveyListGetFunction();
+  const samples = SomehowGetSurveyList();
 
   const navigate = useNavigate();
   const Search = () => {
@@ -35,7 +14,7 @@ function SurveyList() {
     <div>
       <h3>설문 목록</h3>
       <div>
-        <h4 style={{display: "inline"}}>설문 검색</h4>
+        <h4 style={{display: "inline"}}>설문 번호 입력</h4>
         &nbsp;&nbsp;
         <form action="#" onSubmit={Search} style={{display: "inline"}}>
           <input id="surveySearch" />

@@ -17,7 +17,7 @@ function Header() {
       <div>
         <Link to="/">홈</Link>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <Link to="/survey">목록</Link>
+        <Link to="/surveylist">목록</Link>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/admin">관리자</Link>
       </div>

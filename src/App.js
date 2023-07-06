@@ -5,7 +5,8 @@ import Header from './components/Header';
 import LoginPage from './components/LoginPage';
 import Home from './components/Home';
 import SurveyList from './components/SurveyList';
-import SurveyItem from './components/SurveyItem';
+import SurveyItemVotePage from './components/SurveyItemVotePage';
+import SurveyItemResultPage from './components/SurveyItemResultPage';
 import Admin from './components/Admin';
 import Page404 from './components/Page404';
 import LoginNeeded from './components/LoginNeeded';
@@ -26,8 +27,9 @@ function App() {
         {userCredential ?
           <Routes>
             <Route path="/" element={<Home auth={globalAuth} user={userCredential} logout={setUserCredential} />} />
-            <Route path="/survey" element={<SurveyList />} />
-            <Route path="/survey/:surveyID" element={<SurveyItem />} />
+            <Route path="/surveylist" element={<SurveyList />} />
+            <Route path="/survey/:surveyID" element={<SurveyItemVotePage />} />
+            <Route path="/result/:surveyID" element={<SurveyItemResultPage />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/*" element={<Page404 />} />
           </Routes> :
