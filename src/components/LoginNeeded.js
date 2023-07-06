@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function LoginNeeded({ auth }) {
-  const currentUser = auth.currentUser;
+function LoginNeeded() {
   const navigate = useNavigate();
   useEffect(() => {
-    if (!currentUser){
-      setTimeout(() => navigate("/"), 3000);
-    }
+    setTimeout(() => navigate("/"), 3000);
   });
 
   return (

@@ -28,7 +28,7 @@ function App({ app }) {
           </Routes> :
           <Routes>
             <Route path="/" element={<LoginPage auth={globalAuth} login={setUserCredential} />} />
-            <Route path="/*" element={<LoginNeeded auth={globalAuth} />} />
+            <Route path="/*" element={<LoginNeeded />} />
           </Routes>
         }
       </div>
