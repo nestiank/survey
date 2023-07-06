@@ -9,9 +9,7 @@ function Home({ auth, user, logout }) {
   }
 
   const userEmail = user.user.providerData[0].email;
-  // to-do...
-  // const userNickname = SomehowDBGetNickname(userEmail);
-  const userNickname = "nestiank";
+  const userNickname = user.user.providerData[0].displayName;
 
   return (
     <div>
