@@ -4,7 +4,6 @@ import '../style/Misc.css'
 function Home({ auth, user, logout }) {
   const Logout = () => {
     signOut(auth);
-    logout();
     window.location.reload();
   }
 

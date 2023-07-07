@@ -20,13 +20,16 @@ function App() {
       if (user) {
         setUserCredential(user);
       }
+      else {
+        setUserCredential();
+      }
     })
     return (
       <div className="App">
         <Header />
         {userCredential ?
           <Routes>
-            <Route path="/" element={<Home auth={globalAuth} user={userCredential} logout={setUserCredential} />} />
+            <Route path="/" element={<Home auth={globalAuth} user={userCredential} />} />
             <Route path="/surveylist" element={<SurveyList />} />
             <Route path="/survey/:surveyID" element={<SurveyItemVotePage />} />
             <Route path="/result/:surveyID" element={<SurveyItemResultPage />} />
@@ -34,7 +37,7 @@ function App() {
             <Route path="/*" element={<Page404 />} />
           </Routes> :
           <Routes>
-            <Route path="/" element={<LoginPage auth={globalAuth} login={setUserCredential} />} />
+            <Route path="/" element={<LoginPage auth={globalAuth} />} />
             <Route path="/*" element={<LoginNeeded auth={globalAuth} />} />
           </Routes>
         }
