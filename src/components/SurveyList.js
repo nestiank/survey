@@ -1,15 +1,25 @@
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { SomehowGetSurveyList } from '../scripts/database'
+import { GetSurveyItem } from '../scripts/database'
 
 function SurveyList() {
-  const samples = SomehowGetSurveyList();
+  // 설문 목록 불러오기
+  const [surveys, setSurveys] = useState();
+  useEffect(() => {
+    GetSurveyItem(null).then((surveyList) => {
+      setSurveys(surveyList);
+    }).catch((error) => {
+      console.error(error)
+    });
+  }, []);
 
+  // 설문 검색
   const navigate = useNavigate();
   const Search = () => {
     const url = "/survey/" + document.getElementById('surveySearch').value;
     navigate(url);
   };
-  
+
   return (
     <div>
       <h3>설문 목록</h3>
@@ -21,11 +31,11 @@ function SurveyList() {
         </form>
       </div>
       <ul>
-        {samples ?
-          samples.map(
-            survey => (
-              <li key={survey.id}>
-                <Link to={`/survey/${survey.id}`}>설문 #{survey.id}: {survey.title}</Link>
+        {surveys ?
+          Object.keys(surveys).map(
+            key => (
+              <li key={surveys[key].id}>
+                <Link to={`/survey/${surveys[key].id}`}>설문 #{surveys[key].id}: {surveys[key].title}</Link>
               </li>
             )
           ) :
