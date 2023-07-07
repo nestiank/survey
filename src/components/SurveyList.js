@@ -25,7 +25,7 @@ function SurveyList() {
           samples.map(
             survey => (
               <li key={survey.id}>
-                <Link to={`/survey/${survey.id}`}>{survey.title} - {survey.leftPoll} vs. {survey.rightPoll}</Link>
+                <Link to={`/survey/${survey.id}`}>설문 #{survey.id}: {survey.title}</Link>
               </li>
             )
           ) :
