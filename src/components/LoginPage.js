@@ -30,7 +30,7 @@ function LoginPage({ auth, login }) {
     <div>
       <h3>로그인</h3>
       <NaverLogin
-        clientId="Rioh_LQASaofKvv7eelc"
+        clientId={process.env.REACT_APP_NAVER_LOGIN_CLIENTID}
         callbackUrl="https://survey.nestian.kr"
         render={(props) => <div onClick={props.onClick}>
           <img className="loginButton" src="loginButtonNaver.png" alt="네이버 로그인"/>
