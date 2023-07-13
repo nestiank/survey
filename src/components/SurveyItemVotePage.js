@@ -31,18 +31,31 @@ function SurveyItemVotePage() {
   }
 
   if (survey) {
+    // Survey ID is valid
     return (
       <div>
         <p>설문조사</p>
         <p>설문 번호: {surveyID}</p>
         <p>설문 제목: {survey.title}</p>
-        <p onClick={PickLeft}>선택지 #1: {survey.leftPoll}</p>
-        <p onClick={PickRight}>선택지 #2: {survey.rightPoll}</p>
+        <p className="link" onClick={PickLeft}>선택지 #1: {survey.leftPoll}</p>
+        <p className="link" onClick={PickRight}>선택지 #2: {survey.rightPoll}</p>
         <Link to="/surveylist"><p>설문 목록 보기</p></Link>
       </div>
     );
   }
-  else {
+  else if (survey === undefined) {
+    // Query did not return survey yet
+    return (
+      <div>
+        <p>설문조사</p>
+        <p>설문 번호: {surveyID}</p>
+        <p><strong>설문 정보를 불러오고 있습니다.</strong></p>
+        <Link to="/surveylist"><p>설문 목록 보기</p></Link>
+      </div>
+    );
+  }
+  else if (survey === null) {
+    // Survey ID is invalid
     return (
       <div>
         <p>설문조사</p>
