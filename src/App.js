@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Header from './components/Header';
@@ -14,20 +14,24 @@ import Error from './components/Error'
 
 function App() {
   const [userCredential, setUserCredential] = useState();
-  try {
-    const globalAuth = getAuth();
+  const globalAuth = getAuth();
+  useEffect(() => {
     onAuthStateChanged(globalAuth, (user) => {
       if (user) {
         setUserCredential(user);
       }
       else {
-        setUserCredential();
+        setUserCredential(null);
       }
     })
-    return (
-      <div className="App">
-        <Header />
-        {userCredential ?
+  });
+
+  try {
+    if (userCredential) {
+      // User logged in
+      return (
+        <div className="App">
+          <Header />
           <Routes>
             <Route path="/" element={<Home auth={globalAuth} user={userCredential} />} />
             <Route path="/surveylist" element={<SurveyList />} />
@@ -35,14 +39,30 @@ function App() {
             <Route path="/result/:surveyID" element={<SurveyItemResultPage />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/*" element={<Page404 />} />
-          </Routes> :
+          </Routes>
+        </div>
+      );
+    }
+    else if (userCredential === undefined) {
+      // Checking if user logged in
+      return (
+        <div className="App">
+          <Header />
+        </div>
+      );
+    }
+    else if (userCredential === null) {
+      // User not logged in
+      return (
+        <div className="App">
+          <Header />
           <Routes>
             <Route path="/" element={<LoginPage auth={globalAuth} />} />
             <Route path="/*" element={<LoginNeeded auth={globalAuth} />} />
           </Routes>
-        }
-      </div>
-    );
+        </div>
+      );
+    }
   } catch (e) {
     console.log(e);
     return (
