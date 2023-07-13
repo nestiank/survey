@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import '../style/Misc.css'
 
-function Home({ auth, user, logout }) {
+function Home({ auth, user }) {
   const Logout = () => {
     signOut(auth);
     window.location.reload();
