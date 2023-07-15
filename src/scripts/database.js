@@ -1,4 +1,4 @@
-import { getDatabase, ref, get, set } from 'firebase/database';
+import { getDatabase, ref, get, set, runTransaction } from 'firebase/database';
 
 // Create: 설문 생성하기
 const CreateSurveyItem = (survey) => {
@@ -13,6 +13,8 @@ const CreateSurveyItem = (survey) => {
       });
       alert("새로운 설문이 등록되었습니다.");
     }
+  }).catch((error) => {
+    console.error(error);
   });
 }
 
@@ -33,10 +35,10 @@ const GetSurveyItem = (id = null) => {
         resolve(snapshot.val());
       }
       else {
-        resolve(null);
+        reject(new Error("No data available"));
       }
     }).catch((error) => {
-      console.error(error);
+      reject(error);
     });
   });
 }
@@ -47,13 +49,40 @@ const SomehowUpdateSurveyItem = (id, new_survey) => {
   // Somehow update survey (DB)
   console.log("Updated survey");
 }
-const SomehowPickLeft = (id) => {
-  // Somehow increment left vote (DB)
-  console.log("Picked left");
-}
-const SomehowPickRight = (id) => {
-  // Somehow increment right vote (DB)
-  console.log("Picked right");
+
+// Update: 투표 처리하기
+const PickSurveyItem = (id, vote) => {
+  const database = getDatabase();
+  const surveyRef = ref(database, "survey/" + id);
+  return new Promise((resolve, reject) => {
+    if (vote === "left") {
+      runTransaction(surveyRef, (survey) => {
+        if (survey) {
+          survey.leftVotes++;
+        }
+        return survey;
+      }).then(() => {
+        resolve();
+      }).catch((error) => {
+        reject(error);
+      });
+    }
+    else if (vote === "right") {
+      runTransaction(surveyRef, (survey) => {
+        if (survey) {
+          survey.rightVotes++;
+        }
+        return survey;
+      }).then(() => {
+        resolve();
+      }).catch((error) => {
+        reject(error);
+      });
+    }
+    else {
+      reject(new Error("Wrong vote option"));
+    }
+  });
 }
 
 // Delete: 설문 삭제하기
@@ -68,4 +97,4 @@ export { CreateSurveyItem };
 // Used in SurveyList & SurveyItemVotePage & SurveyItemResultPage
 export { GetSurveyItem };
 // Used in SurveyItemVotePage
-export { SomehowPickLeft, SomehowPickRight };
+export { PickSurveyItem };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { GetSurveyItem, SomehowPickLeft, SomehowPickRight } from '../scripts/database'
+import { GetSurveyItem, PickSurveyItem } from '../scripts/database'
 
 function SurveyItemVotePage() {
   const { surveyID } = useParams();
@@ -11,23 +11,27 @@ function SurveyItemVotePage() {
     GetSurveyItem(surveyID).then((surveyItem) => {
       setSurvey(surveyItem);
     }).catch((error) => {
-      console.error(error)
+      console.error(error);
     });
   }, [surveyID]);
 
   // 투표 처리 및 결과 페이지로 리다이렉트
   const navigate = useNavigate();
   const PickLeft = () => {
-    SomehowPickLeft(surveyID);
-
-    const url = "/result/" + surveyID
-    navigate(url);
+    PickSurveyItem(surveyID, "left").then(() => {
+      const url = "/result/" + surveyID;
+      navigate(url);
+    }).catch((error) => {
+      console.error(error);
+    });
   }
   const PickRight = () => {
-    SomehowPickRight(surveyID);
-
-    const url = "/result/" + surveyID
-    navigate(url);
+    PickSurveyItem(surveyID, "right").then(() => {
+      const url = "/result/" + surveyID;
+      navigate(url);
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   if (survey) {
