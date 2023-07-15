@@ -24,7 +24,10 @@ function Admin() {
       <h3>관리자 페이지</h3>
       <ul>
         <li>C: 새로운 설문 생성</li>
-        <div>
+        <form action="/create" method="post" onSubmit={(e) => {
+          e.preventDefault();
+          CreateSurvey();
+        }}>
           <p>설문 ID</p>
           <input type="number" id="surveyID"/>
           <p>설문 제목</p>
@@ -34,8 +37,8 @@ function Admin() {
           <p>선택지 2</p>
           <input type="text" id="rightPoll"/>
           <p>제출하기</p>
-          <input type="button" value="제출" name="submit" onClick={CreateSurvey}/>
-        </div>
+          <input type="submit" value="제출" id="surveySubmit"/>
+        </form>
         <li>TO-DO</li>
         <ul>
           <li>R: 고급 설문 목록</li>
