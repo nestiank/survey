@@ -11,7 +11,7 @@ function SurveyItemResultPage() {
     GetSurveyItem(surveyID).then((surveyItem) => {
       setSurvey(surveyItem);
     }).catch((error) => {
-      console.error(error)
+      console.error(error);
     });
   }, [surveyID]);
 

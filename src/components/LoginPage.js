@@ -12,14 +12,14 @@ function LoginPage({ auth, login }) {
       updateProfile(auth.currentUser, {
         displayName: nickname
       });
-    } catch (e) {
+    } catch (error) {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, mock_password);
         updateProfile(auth.currentUser, {
           displayName: nickname
         });
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error);
       }
     }
   };

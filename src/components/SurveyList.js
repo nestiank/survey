@@ -9,7 +9,7 @@ function SurveyList() {
     GetSurveyItem(null).then((surveyList) => {
       setSurveys(surveyList);
     }).catch((error) => {
-      console.error(error)
+      console.error(error);
     });
   }, []);
 
