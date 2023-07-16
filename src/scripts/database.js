@@ -1,4 +1,4 @@
-import { getDatabase, ref, get, set, runTransaction } from 'firebase/database';
+import { getDatabase, ref, get, set, remove, runTransaction } from 'firebase/database';
 
 // Create: 설문 생성하기
 const CreateSurveyItem = (survey) => {
@@ -86,14 +86,16 @@ const PickSurveyItem = (id, vote) => {
 }
 
 // Delete: 설문 삭제하기
-// TO-DO
-const SomehowDeleteSurveyItem = (id, new_survey) => {
-  // Somehow delete survey (DB)
-  console.log("Deleted survey");
+const DeleteSurveyItem = (id) => {
+  // Promise 불필요
+  const database = getDatabase();
+  const surveyRef = ref(database, "survey/" + id);
+  remove(surveyRef);
+  alert("설문이 삭제되었습니다.");
 }
 
 // Used in Admin
-export { CreateSurveyItem };
+export { CreateSurveyItem, DeleteSurveyItem };
 // Used in SurveyList & SurveyItemVotePage & SurveyItemResultPage
 export { GetSurveyItem };
 // Used in SurveyItemVotePage
