@@ -7,7 +7,7 @@ const CreateSurveyItem = (survey) => {
     if (result) {
       alert("설문 ID가 중복됩니다.");
     }
-    else {
+    else if (result === null) {
       set(ref(database, "survey/" + survey.id), survey).catch((error) => {
         console.error(error);
       });
@@ -35,7 +35,7 @@ const GetSurveyItem = (id = null) => {
         resolve(snapshot.val());
       }
       else {
-        reject(new Error("No data available"));
+        resolve(null);
       }
     }).catch((error) => {
       reject(error);
