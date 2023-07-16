@@ -1,4 +1,4 @@
-import { getDatabase, ref, get, set, remove, runTransaction } from 'firebase/database';
+import { getDatabase, ref, get, set, update, remove, runTransaction } from 'firebase/database';
 
 // Create: 설문 생성하기
 const CreateSurveyItem = (survey) => {
@@ -44,10 +44,12 @@ const GetSurveyItem = (id = null) => {
 }
 
 // Update: 설문 내용 수정하기
-// TO-DO
-const SomehowUpdateSurveyItem = (id, new_survey) => {
-  // Somehow update survey (DB)
-  console.log("Updated survey");
+const UpdateSurveyItem = (id, new_survey) => {
+  const database = getDatabase();
+  const updates = {};
+  updates["survey/" + id] = new_survey;
+  update(ref(database), updates);
+  alert("설문이 수정되었습니다.");
 }
 
 // Update: 투표 처리하기
@@ -62,6 +64,7 @@ const PickSurveyItem = (id, vote) => {
         }
         return survey;
       }).then(() => {
+        alert("선택지 1에 투표하셨습니다.");
         resolve();
       }).catch((error) => {
         reject(error);
@@ -74,6 +77,7 @@ const PickSurveyItem = (id, vote) => {
         }
         return survey;
       }).then(() => {
+        alert("선택지 2에 투표하셨습니다.");
         resolve();
       }).catch((error) => {
         reject(error);
@@ -95,8 +99,8 @@ const DeleteSurveyItem = (id) => {
 }
 
 // Used in Admin
-export { CreateSurveyItem, DeleteSurveyItem };
-// Used in SurveyList & SurveyItemVotePage & SurveyItemResultPage
+export { CreateSurveyItem, UpdateSurveyItem, DeleteSurveyItem };
+// Used in Admin & SurveyList & SurveyItemVotePage & SurveyItemResultPage
 export { GetSurveyItem };
 // Used in SurveyItemVotePage
 export { PickSurveyItem };
